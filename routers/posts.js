@@ -13,10 +13,10 @@ router.get(`/:id`, checkPostExists, postsController.show);
 // router.post("", postsController.create);
 
 // Update 
-// router.put(`/:id`, checkPostExists, postsController.update );
+// router.put(`/:id`, checkPostExists, postsController.update);
 
 // Modify
-// router.patch(`/:id`, checkPostExists, postsController.modify)
+// router.patch(`/:id`, checkPostExists, postsController.modify);
 
 // Delete
 router.delete(`/:id`, checkPostExists, postsController.destroy);

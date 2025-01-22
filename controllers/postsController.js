@@ -1,6 +1,6 @@
 
 const index = (req, res) => {
-
+   
 };
 
 const show = (req, res) => {
@@ -26,8 +26,8 @@ const destroy = (req, res) => {
 module.exports = {
     index,
     show,
-    create,
-    update,
-    modify,
+    // create,
+    // update,
+    // modify,
     destroy
 };
