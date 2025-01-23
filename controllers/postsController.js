@@ -22,6 +22,13 @@ const show = (req, res) => {
 
     const sql = "SELECT * FROM `posts` WHERE `id` = ?";
 
+    const tagsSql = `SELECT posts.* , tags.label 
+    FROM posts 
+    JOIN post_tag 
+    ON posts.id = post_tag.post_id 
+    JOIN tags 
+    ON tags.id = post_tag.tag_id`;
+
     connection.query(sql, [id], (err, results) => {
         if (err) {
             return res.status(500).json({
@@ -32,12 +39,25 @@ const show = (req, res) => {
                 message: "Post non trovato",
             });
         } else {
-            return res.status(200).json({
-                status: "success",
-                data: results[0],
+            connection.query(tagsSql, [id], (err, tags) => {
+                if (err) {
+                    return res.status(500).json({
+                        message: "Errore interno del server"
+                    });
+                }
+
+                const postTags = {
+                    ...posts[0],
+                    tags: tags
+                };
+
+                return res.status(200).json({
+                    status: "success",
+                    data: postTags
+                });
             });
         }
-    });
+    })
 };
 
 // const create = (req, res) => {
